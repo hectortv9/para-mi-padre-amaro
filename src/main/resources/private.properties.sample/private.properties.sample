@@ -1,0 +1,3 @@
+local.destination.path=C:/directorioX
+remote.source.path.1=//la_cucaracha/Shared_Network
+polling.time.seconds=10
