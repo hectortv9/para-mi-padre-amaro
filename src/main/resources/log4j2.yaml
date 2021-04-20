@@ -1,0 +1,40 @@
+Configuration:
+  # TRACE DEBUG INFO WARN ERROR FATAL
+  status: warn # change to warn after configuring debuggin correctly
+  # name: YAMLConfigTest
+  Properties:
+    Property:
+      - name: log-dir
+        value: "logs"
+      - name: filename
+        value: "FileCopier"
+  thresholdFilter:
+    level: trace
+  Appenders:
+    Console:
+      name: console
+      target: SYSTEM_OUT
+      PatternLayout:
+        pattern: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"
+    RollingFile:
+      - name: rolling-file
+        fileName: "${log-dir}/${filename}.log"
+        filePattern: "${log-dir}/archive/${filename}-%d{yyyyMMdd-hhmmss}.log.zip"
+        PatternLayout:
+          pattern: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"
+        Policies:
+          SizeBasedTriggeringPolicy:
+            size: 10 MB
+        DefaultRollOverStrategy:
+          max: 60
+  Loggers:
+    Root:
+      level: trace
+      AppenderRef:
+        ref: console
+    Logger:
+      - name: com.hectortv9.copyFiles
+        level: debug
+        additivity: true
+        AppenderRef:
+          ref: rolling-file

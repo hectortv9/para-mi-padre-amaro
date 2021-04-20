@@ -1,3 +1,4 @@
-local.destination.path=C:/directorioX
-remote.source.path.1=//la_cucaracha/Shared_Network
+local.path=C:/directorioX
+remote.path.1=//la_cucaracha/Shared_Network
+remote.path.2=C:/Shared_Network
 polling.time.seconds=10
