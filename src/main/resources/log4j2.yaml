@@ -24,7 +24,7 @@ Configuration:
           pattern: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"
         Policies:
           SizeBasedTriggeringPolicy:
-            size: 10 KB
+            size: 10 MB
   Loggers:
     Root:
       level: trace
