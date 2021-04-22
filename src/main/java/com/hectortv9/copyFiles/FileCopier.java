@@ -24,8 +24,6 @@ public class FileCopier {
     private static final Logger LOGGER = LogManager.getLogger(FileCopier.class);
     private static final Properties PRIVATE_PROPERTIES = new Properties();
 
-    //TODO: Review logging strategies
-    //TODO: Verify logging, resource loading (property) works after application is packed
     public static void main(String[] args) {
         try {
             loadProperties();
@@ -39,6 +37,14 @@ public class FileCopier {
         int seconds = Integer.parseInt(PRIVATE_PROPERTIES.getProperty("polling.time.seconds")) * 1000;
         Path localDir = Paths.get(PRIVATE_PROPERTIES.getProperty("local.path"));
         LOGGER.info("Local directory: {}", localDir);
+        if(Files.notExists(localDir)) {
+            LOGGER.error("Local directory does NOT exist: {}", localDir);
+            System.exit(1);
+        }
+        if(!Files.isDirectory(localDir)) {
+            LOGGER.error("Local directory is NOT a directory: {}", localDir);
+            System.exit(1);
+        }
         ArrayList<Path> remoteDirs = getRemoteDirs();
         while (true) {
             syncFiles(localDir, remoteDirs);
